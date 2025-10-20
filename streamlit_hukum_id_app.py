@@ -69,6 +69,12 @@ with st.sidebar:
             index=0,
             help="Fokus area pembahasan agar respons lebih relevan.",
         )
+        
+        # Unggah PDF di sini
+        aktifkan_rag_pdf = st.checkbox("Aktifkan RAG dari PDF", value=False, help="Gunakan konten PDF sebagai sumber konteks tambahan.")
+        uploaded_pdfs = st.file_uploader("Unggah PDF (bisa lebih dari satu)", type=["pdf"], accept_multiple_files=True, help="PDF akan diproses lokal dan tidak diunggah ke server lain.")
+        bangun_indeks = st.button("Bangun/Perbarui Indeks PDF", use_container_width=True)
+        hapus_indeks = st.button("Bersihkan Indeks PDF", use_container_width=True, help="Hapus indeks RAG dari memori aplikasi.")
 
         # Chart Biru (Prompting) tepat DI BAWAH Model
         _cur_temperature = float(st.session_state.get("temperature", 0.3))
@@ -128,10 +134,6 @@ with st.sidebar:
             help="Batas panjang jawaban model.",
             key="max_output_tokens",
         )
-        
-        
-
-        aktifkan_rag_pdf = st.checkbox("Aktifkan RAG dari PDF", value=False, help="Gunakan konten PDF sebagai sumber konteks tambahan.")
 
         # Chart Hijau (RAG) tepat DI BAWAH toggle Aktifkan RAG
         _cur_top_k_docs = float(st.session_state.get("rag_top_k", 4))
@@ -169,9 +171,6 @@ with st.sidebar:
             help="Memotong konteks RAG agar prompt tidak terlalu panjang.",
             key="max_context_chars",
         )
-        uploaded_pdfs = st.file_uploader("Unggah PDF (bisa lebih dari satu)", type=["pdf"], accept_multiple_files=True, help="PDF akan diproses lokal dan tidak diunggah ke server lain.")
-        bangun_indeks = st.button("Bangun/Perbarui Indeks PDF", use_container_width=True)
-        hapus_indeks = st.button("Bersihkan Indeks PDF", use_container_width=True, help="Hapus indeks RAG dari memori aplikasi.")
         # Memori profil dihapus; selalu nonaktif
         memori_diaktifkan = False
 

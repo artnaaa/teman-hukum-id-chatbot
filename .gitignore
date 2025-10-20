@@ -1,5 +1,9 @@
 .streamlit/secrets.toml
 
+# Database files
+*.db
+hukum_data.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
